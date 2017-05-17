@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dao.IGroupOP">
+
+
+    <!--private String groupId;-->
+    <!--private String groupTaskId;-->
+    <!--private Integer teacherScore;-->
+    <!--private String classScore;-->
+    <!--private Integer groupBonusNum;-->
+    <!--private String groupTeacherOpenId;-->
+    <!--private Integer groupBonusType;-->
+
+    <resultMap id="GroupTaskConnectionMapper" type="entity.GroupTaskConnectionEntity">
+
+        <id column="group_id" property="groupId"/>
+        <result column="group_task_id" property="groupTaskId"/>
+        <result column="teacher_score" property="teacherScore"/>
+        <result column="class_score" property="classScore"/>
+        <result column="group_bonus_num" property="groupBonusNum"/>
+        <result column="group_teacher_open_id" property="groupTeacherOpenId"/>
+        <result column="group_bonus_type" property="groupBonusType"/>
+
+    </resultMap>
+
+
+    <!--private String groupId;-->
+    <!--private String groupDate;-->
+    <!--private String groupName;-->
+    <!--private String groupLeaderName;-->
+    <!--private String groupMembers;-->
+    <resultMap id="GroupInfoMapper" type="entity.GroupInfoEntity">
+        <id column="group_id" property="groupId"/>
+
+        <result column="group_date" property="groupDate"/>
+        <result column="group_name" property="groupName"/>
+        <result column="group_leader_name" property="groupLeaderName"/>
+        <result column="group_members" property="groupMembers"/>
+
+
+    </resultMap>
+
+    <!--private String groupTaskId;-->
+    <!--private String groupTaskPublishDate;-->
+    <!--private String groupTaskContent;-->
+    <!--private String groupTaskDdl;-->
+    <resultMap id="GroupTaskMapper" type="entity.GroupTaskEntity">
+        <id column="group_task_id" property="groupTaskId"/>
+
+        <result column="group_task_publish_date" property="groupTaskPublishDate"/>
+        <result column="group_task_content" property="groupTaskContent"/>
+        <result column="group_task_ddl" property="groupTaskDdl"/>
+
+
+    </resultMap>
+
+
+
+    <!--private String tId;-->
+    <!--private String cId;-->
+    <!--private String groupMemberLimit;-->
+    <!--private Integer groupOpening;-->
+    <!--private String teacherCourseGroupId;-->
+    <resultMap id="TeacherCourseGroupMapper" type="entity.TeacherCourseGroupTableEntity">
+        <id column="teacher_course_group_id" property="teacherCourseGroupId"/>
+
+        <result column="t_id" property="tId"/>
+        <result column="c_id" property="cId"/>
+        <result column="group_member_limit" property="groupMemberLimit"/>
+        <result column="group_opening" property="groupOpening"/>
+        <result column="group_open_time" property="groupOpenTime"/>
+
+
+    </resultMap>
+
+    <!--<insert id="insertBonusInfo" parameterType="entity.TeacherClassAskEntity">-->
+        <!--INSERT INTO PlanterDatabase.teacher_class_ask (teacher_class_ask_id, open_class_id, ask_bonus, s_id, bonus_type) VALUES (#{teacherClassAskId}, #{openClassId}, #{askBonus}, #{sId}, #{bonusType});-->
+    <!--</insert>-->
+
+    <insert id="insertTeacherCourseGroupEntity" parameterType="entity.TeacherCourseGroupTableEntity">
+
+        INSERT INTO PlanterDatabase.teacher_course_group_table (t_id, c_id, group_member_limit, group_opening, teacher_course_group_id, group_open_time) VALUES (#{tId}, #{cId}, #{groupMemberLimit}, #{groupOpening}, #{teacherCourseGroupId}, #{groupOpenTime})
+
+    </insert>
+
+    <insert id="insertStudentGroupInfoEntity" parameterType="entity.GroupInfoEntity">
+
+        INSERT INTO PlanterDatabase.group_info (group_id, group_date, group_name, group_members, group_leader_name)
+        VALUES (#{groupId}, #{groupDate}, #{groupName}, #{groupMembers}, #{groupLeaderName})
+
+    </insert>
+
+    <insert id="insertGroupTaskConnection" parameterType="entity.GroupTaskConnectionEntity">
+
+        INSERT INTO PlanterDatabase.group_task_connection (group_id, group_task_id, teacher_score, class_score, group_bonus_num, group_teacher_open_id, group_bonus_type)
+        VALUES (#{groupId}, #{groupTaskId}, #{teacherScore}, #{classScore}, #{groupBonusNum}, #{groupTeacherOpenId}, #{groupBonusType})
+
+    </insert>
+
+    <insert id="insertGroupTaskInfoEntity" parameterType="entity.GroupTaskEntity">
+
+        INSERT INTO PlanterDatabase.group_task (group_task_id, group_task_publish_date, group_task_content, group_task_ddl)
+        VALUES (#{groupTaskId}, #{groupTaskPublishDate}, #{groupTaskContent}, #{groupTaskDdl})
+
+    </insert>
+
+
+    <!--List<TeacherCourseGroupTableEntity> selectTeacherCourseGroupByCourseId(@Param("cId") String courseId);-->
+
+
+    <!--List<GroupTaskConnectionEntity> selectGroupTaskConnectionEntityListByTeacherCourseGroupId(String teacherCourseGroupId);-->
+
+    <!--GroupInfoEntity selectGroupInfoEntityByGroupId(String groupId);-->
+
+    <select id="selectTeacherCourseGroupByCourseId" resultMap="TeacherCourseGroupMapper">
+
+        SELECT * FROM PlanterDatabase.teacher_course_group_table WHERE c_id=#{cId}
+
+    </select>
+
+    <select id="selectGroupTaskEntityByGroupTaskId" resultMap="GroupTaskMapper">
+
+        SELECT * FROM PlanterDatabase.group_task WHERE group_task_id=#{groupTaskId}
+
+    </select>
+
+    <select id="selectGroupTaskConnectionEntityListByTeacherCourseGroupId" resultMap="GroupTaskConnectionMapper">
+
+        SELECT * FROM PlanterDatabase.group_task_connection WHERE group_teacher_open_id=#{groupTeacherOpenId}
+
+    </select>
+
+    <select id="selectGroupInfoEntityByGroupId" parameterType="String" resultMap="GroupInfoMapper">
+
+        SELECT * FROM PlanterDatabase.group_info WHERE group_id=#{groupId}
+
+    </select>
+
+    <select id="getGroupTaskConnectionEntityByGroupId" resultMap="GroupTaskConnectionMapper">
+
+        SELECT * FROM PlanterDatabase.group_task_connection WHERE group_id=#{groupId}
+
+    </select>
+
+    <update id="updateGroupTaskConnection" parameterType="entity.GroupTaskConnectionEntity">
+
+        UPDATE PlanterDatabase.group_task_connection SET group_task_id=#{groupTaskId} WHERE group_id=#{groupId}
+
+    </update>
+
+</mapper>

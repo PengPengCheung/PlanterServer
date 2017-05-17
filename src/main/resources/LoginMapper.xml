@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dao.ILoginOP">
+
+    <!--private String sId;-->
+    <!--private String sName;-->
+    <!--private String sHeadUrl;-->
+    <!--private String sSchool;-->
+    <!--private String sNo;-->
+    <!--private String sPassword;-->
+
+    <resultMap id="LoginStudentInfoMapper" type="entity.StudentInfoEntity">
+
+        <id column="s_id" property="sId"/>
+        <result column="s_name" property="sName"/>
+        <result column="s_no" property="sNo"/>
+        <result column="s_password" property="sPassword"/>
+        <result column="s_head_url" property="sHeadUrl"/>
+        <result column="s_school" property="sSchool"/>
+
+    </resultMap>
+
+
+    <!--private String tId;-->
+    <!--private String tName;-->
+    <!--private String tSchool;-->
+    <!--private String tPassword;-->
+
+    <resultMap id="LoginTeacherInfoMapper" type="entity.TeacherInfoEntity">
+        <id column="t_id" property="tId"/>
+        <result column="t_name" property="tName"/>
+        <result column="t_school" property="tSchool" />
+        <result column="t_password" property="tPassword"/>
+
+    </resultMap>
+
+
+    <!--List<TeacherInfoEntity> getTeacherList();-->
+
+    <!--List<StudentInfoEntity> getStudentList();-->
+
+
+    <select id="getStudentList" resultMap="LoginStudentInfoMapper">
+
+        select * from student_info
+
+    </select>
+
+    <select id="getTeacherList" resultMap="LoginTeacherInfoMapper">
+
+        select * from PlanterDatabase.teacher_info
+
+    </select>
+
+    <!--<update id=""></update>-->
+    <!--<select id="selectAttendanceCountById" parameterType=""></select>-->
+    <!--<delete id=""></delete>-->
+</mapper>

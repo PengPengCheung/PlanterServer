@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dao.ITreeInfo">
+
+
+    <!--private int treeStatus;-->
+    <!--private int treeSoil;-->
+    <!--private int treeWater;-->
+    <!--private int treeSun;-->
+
+    <resultMap id="treeInfoMapper" type="entity.TreeInfoEntity">
+        <id column="tree_id" property="treeId"/>
+        <result column="tree_status" property="treeStatus"/>
+        <result column="tree_water" property="treeWater"/>
+        <result column="tree_sun" property="treeSun"/>
+        <result column="tree_soil" property="treeSoil"/>
+        <result column="tree_soil_used_num" property="treeSoilUsedNum" />
+        <result column="tree_water_used_num" property="treeWaterUsedNum" />
+        <result column="tree_sun_used_num" property="treeSunUsedNum"/>
+    </resultMap>
+
+    <select id="selectTreeInfoById" parameterType="String" resultMap="treeInfoMapper">
+
+        SELECT * from PlanterDatabase.tree_info WHERE tree_id=#{treeId}
+
+    </select>
+
+    <insert id="insertTreeInfo" parameterType="entity.TreeInfoEntity" >
+
+        INSERT INTO PlanterDatabase.tree_info (tree_id, tree_status, tree_soil, tree_water, tree_sun, tree_soil_used_num, tree_water_used_num, tree_sun_used_num)
+        VALUES (#{treeId}, #{treeStatus}, #{treeSoil}, #{treeWater}, #{treeSun}, #{treeSoilUsedNum}, #{tree_water_used_num}, #{treeSunUsedNum});
+
+
+    </insert>
+
+
+
+    <!--<update id=""></update>-->
+    <!--<select id="selectAttendanceCountById" parameterType=""></select>-->
+    <!--<delete id=""></delete>-->
+</mapper>

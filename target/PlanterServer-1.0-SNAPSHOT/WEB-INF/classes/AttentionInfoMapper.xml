@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dao.IAttentionOP">
+
+
+    <!--private String attentionId;-->
+    <!--private String attentionDuration;-->
+    <!--private int attentionType;-->
+    <!--private String attentionTime;-->
+
+    <resultMap type="entity.TeacherCourseAttentionTableEntity" id="teacherCourseAttentionResultMap">
+        <!--<id column="id" property="id" />-->
+        <id column="teacher_course_attention_id" property="teacherCourseAttentionId" />
+
+        <result column="open_class_id" property="openClassId" />
+        <result column="attention_begin_time" property="attentionBeginTime" />
+        <result column="attention_end_time" property="attentionEndTime" />
+        <result column="attention_type" property="attentionType"/>
+        <result column="attention_duration" property="attentionDuration"/>
+
+    </resultMap>
+
+
+    <insert id="insertStudentCourseAttentionConnection" parameterType="entity.StudentPerformanceAttentionTableEntity">
+
+        INSERT INTO PlanterDatabase.student_performance_attention_table (student_performance_attention_id, open_class_id, attention_id, s_id)
+        VALUES (#{studentPerformanceAttentionId}, #{openClassId}, #{attentionId}, #{sId})
+    </insert>
+
+    <!--private String attentionId;-->
+    <!--private String attentionDuration;-->
+    <!--private int attentionType;-->
+    <!--private String attentionTime;-->
+    <!--private String attentionEndTime;-->
+    <!--private int attentionStatus;-->
+    <!--private Integer attentionScore;-->
+    <!--private Integer attentionBonusType;-->
+    <!--private Integer attentionBonusNum;-->
+    <!--private String attentionInsistTime;-->
+
+    <insert id="insertAttentionRecord" parameterType="entity.AttentionInfoEntity">
+        INSERT INTO PlanterDatabase.attention_info (attention_id, attention_duration, attention_type, attention_time, attention_end_time, attention_status, attention_score, attention_bonus_type, attention_bonus_num, attention_insist_time)
+        VALUES (#{attentionId}, #{attentionDuration}, #{attentionType}, #{attentionTime}, #{attentionEndTime}, #{attentionStatus}, #{attentionScore}, #{attentionBonusType}, #{attentionBonusNum}, #{attentionInsistTime});
+    </insert>
+
+
+    <!--private String teacherCourseAttentionId;-->
+    <!--private String openClassId;-->
+    <!--private String attentionBeginTime;-->
+    <!--private String attentionEndTime;-->
+    <!--private int attentionType;-->
+    <!--private String attentionDuration;-->
+    <insert id="insertTeacherAttentionPublishInfo" parameterType="entity.TeacherCourseAttentionTableEntity">
+
+        INSERT INTO PlanterDatabase.teacher_course_attention_table (teacher_course_attention_id,  open_class_id, attention_begin_time, attention_end_time, attention_type, attention_duration) VALUES (#{teacherCourseAttentionId}, #{openClassId}, #{attentionBeginTime}, #{attentionEndTime}, #{attentionType}, #{attentionDuration});
+
+    </insert>
+
+
+
+
+    <!--private String teacherCourseAttentionId;-->
+    <!--private String openClassId;-->
+    <!--private String attentionBeginTime;-->
+    <!--private String attentionEndTime;-->
+    <!--private int attentionType;-->
+    <!--private String attentionDuration;-->
+
+    <update id="updateTeacherAttentionEntity" parameterType="entity.TeacherCourseAttentionTableEntity">
+
+        UPDATE PlanterDatabase.teacher_course_attention_table SET attention_end_time=#{attentionEndTime} WHERE teacher_course_attention_id=#{teacherCourseAttentionId}
+
+    </update>
+
+    <select id="selectTeacherAttentionListByOpenClassId" resultMap="teacherCourseAttentionResultMap">
+
+        SELECT * FROM PlanterDatabase.teacher_course_attention_table WHERE open_class_id=#{openClassId}
+
+    </select>
+
+
+    <!--<update id=""></update>-->
+    <!--<select id="selectAttendanceCountById" parameterType=""></select>-->
+    <!--<delete id=""></delete>-->
+</mapper>

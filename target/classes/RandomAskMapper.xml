@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dao.IRandomAskOP">
+
+    <!--<resultMap id="ClassInfoMapper" type="dao.IClassOP">-->
+
+        <!--<id column="open_class_id" property="openClassId"/>-->
+        <!--<result column="c_id" property="cId"/>-->
+        <!--<result column="t_id" property="tId"/>-->
+        <!--<result column="class_begin_time" property="classBeginTime"/>-->
+        <!--<result column="class_end_time" property="classEndTime"/>-->
+        <!--<result column="class_status" property="classStatus"/>-->
+
+    <!--</resultMap>-->
+
+    <insert id="insertRandomAskInfo" parameterType="entity.RandomAskInfoEntity">
+        INSERT INTO PlanterDatabase.random_ask_info (random_ask_id, random_ask_time, random_ask_status) VALUES (#{randomAskId}, #{randomAskTime}, #{randomAskStatus});
+    </insert>
+
+
+    <insert id="insertTeacherRandomAskInfo" parameterType="entity.TeacherClassRandomAskTableEntity">
+        INSERT INTO PlanterDatabase.teacher_class_random_ask_table (teacher_class_random_ask_id, open_class_id, random_ask_id) VALUES (#{teacherClassRandomAskId}, #{openClassId}, #{randomAskId});
+    </insert>
+
+
+    <!--<update id=""></update>-->
+    <!--<select id="selectAttendanceCountById" parameterType=""></select>-->
+    <!--<delete id=""></delete>-->
+</mapper>

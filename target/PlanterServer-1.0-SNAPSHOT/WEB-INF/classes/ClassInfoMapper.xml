@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dao.IClassOP">
+
+    <resultMap id="ClassInfoMapper" type="entity.StudentTeacherClassTableEntity">
+
+        <id column="open_class_id" property="openClassId"/>
+        <result column="c_id" property="cId"/>
+        <result column="t_id" property="tId"/>
+        <result column="class_begin_time" property="classBeginTime"/>
+        <result column="class_end_time" property="classEndTime"/>
+        <result column="class_status" property="classStatus"/>
+
+    </resultMap>
+
+    <resultMap type="entity.TeacherCourseAttendanceTableEntity" id="teacherCourseAttendanceResultMap">
+        <!--<id column="id" property="id" />-->
+        <id column="teacher_attendance_id" property="teacherAttendanceId" />
+
+        <result column="open_class_id" property="openClassId" />
+        <result column="attendance_begin_time" property="attendanceBeginTime" />
+        <result column="attendance_end_time" property="attendanceEndTime" />
+        <result column="attendance_begin_status" property="attendanceBeginStatus"/>
+        <result column="attendance_code" property="attendanceCode"/>
+        <result column="attendance_count" property="attendanceCount"/>
+        <result column="absence_count" property="absenceCount"/>
+
+    </resultMap>
+
+    <insert id="insertClassOpenRecord" parameterType="entity.StudentTeacherClassTableEntity">
+        INSERT INTO PlanterDatabase.student_teacher_class_table (c_id, t_id, open_class_id, class_begin_time, class_end_time, class_status) VALUES (#{cId}, #{tId}, #{openClassId}, #{classBeginTime}, #{classEndTime}, #{classStatus});
+    </insert>
+
+
+    <select id="getClassOpenRecordByTeacherIdAndCourseId" resultMap="ClassInfoMapper" >
+
+        SELECT * FROM PlanterDatabase.student_teacher_class_table WHERE t_id=#{tId} AND c_id=#{cId}
+
+    </select>
+
+    <select id="getTeacherCourseAttendanceEntities" resultMap="teacherCourseAttendanceResultMap">
+
+        SELECT * FROM PlanterDatabase.teacher_course_attendance_table WHERE open_class_id=#{openClassId}
+
+    </select>
+
+    <select id="selectOpenClassRecordByOpenClassId" resultMap="ClassInfoMapper">
+
+        SELECT * FROM PlanterDatabase.student_teacher_class_table WHERE open_class_id=#{openClassId}
+
+    </select>
+
+
+
+    <!--<update id=""></update>-->
+    <!--<select id="selectAttendanceCountById" parameterType=""></select>-->
+    <!--<delete id=""></delete>-->
+</mapper>

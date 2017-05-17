@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dao.IBaseConnection">
+
+    <!--private String cId;-->
+    <!--private String sId;-->
+    <!--private String tId;-->
+    <!--private String baseConnectionId;-->
+    <!--private String courseCode;-->
+    <!--<result column="course_code" property="courseCode" />-->
+
+    <resultMap type="entity.BaseConnectionEntity" id="resultListBaseConnection">
+        <!--<id column="id" property="id" />-->
+        <id column="base_connection_id" property="baseConnectionId" />
+
+        <result column="c_id" property="cId" />
+        <result column="s_id" property="sId" />
+        <result column="t_id" property="tId" />
+
+    </resultMap>
+
+    <update id="updateBaseConnection" >
+        update PlanterDatabase.base_connection set s_id=#{sId} WHERE c_id=#{cId}
+    </update>
+
+
+    <!--<update id=""></update>-->
+    <select id="getStudentIdFromBaseConnection" resultMap="resultListBaseConnection">
+
+        select * from base_connection where t_id=#{teacherId} and c_id=#{courseId}
+
+    </select>
+
+    <select id="selectAllConnection" resultMap="resultListBaseConnection">
+
+        SELECT * FROM PlanterDatabase.base_connection
+
+    </select>
+
+    <select id="selectBaseConnectionListByTeacherId" resultMap="resultListBaseConnection">
+
+        SELECT * FROM PlanterDatabase.base_connection WHERE t_id=#{teacherId}
+
+    </select>
+
+    <select id="selectBaseConnectionListByCourseId" resultMap="resultListBaseConnection">
+
+        SELECT * FROM PlanterDatabase.base_connection WHERE c_id=#{courseId}
+
+    </select>
+
+    <select id="selectBaseConnectionByCourseCode" resultMap="resultListBaseConnection">
+
+        SELECT * FROM base_connection WHERE c_id=#{cId}
+
+    </select>
+
+    <select id="selectBaseConnectionByCourseIdAndStudentId" resultMap="resultListBaseConnection">
+
+        SELECT * FROM PlanterDatabase.base_connection WHERE c_id=#{cId} AND s_id=#{sId}
+
+    </select>
+
+    <select id="selectBaseConnectionListByStudentId" resultMap="resultListBaseConnection">
+
+        SELECT * FROM PlanterDatabase.base_connection WHERE s_id=#{sId}
+
+    </select>
+
+    <insert id="addBaseConnection">
+        INSERT INTO base_connection (c_id, s_id, t_id, base_connection_id, course_code) VALUES (#{c_id}, #{s_id}, #{t_id}, #{base_connection_id}, #{course_code});
+
+
+    </insert>
+
+    <insert id="insertBaseConnectionEntity">
+        INSERT INTO base_connection (c_id, s_id, t_id, base_connection_id) VALUES (#{cId}, #{sId}, #{tId}, #{baseConnectionId});
+
+
+    </insert>
+
+    <!--<delete id=""></delete>-->
+</mapper>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dao.ITeacherSummaryOP">
+
+    <!--private String tId;-->
+    <!--private String cId;-->
+    <!--private String summaryRequestTime;-->
+
+    <resultMap id="TeacherSummaryMapper" type="entity.TeacherSummaryEntity">
+
+        <result column="t_id" property="tId"/>
+        <result column="c_id" property="cId"/>
+        <result column="summary_request_time" property="summaryRequestTime"/>
+
+    </resultMap>
+
+
+    <insert id="insertTeacherSummary" parameterType="entity.TeacherSummaryEntity">
+        INSERT INTO PlanterDatabase.teacher_summary (summary_request_time, open_class_id, teacher_summary_id) VALUES (#{summaryRequestTime}, #{openClassId}, #{teacherSummaryId});
+    </insert>
+
+
+    <!--<update id=""></update>-->
+    <!--<select id="selectAttendanceCountById" parameterType=""></select>-->
+    <!--<delete id=""></delete>-->
+</mapper>

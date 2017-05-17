@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
+        version="2.0">
+
+    <entity class="entity.StudentInfoEntity">
+        <table name="student_info" schema="PlanterDatabase" catalog=""/>
+        <attributes>
+            <id name="sId">
+                <column name="s_id"/>
+            </id>
+            <basic name="sName">
+                <column name="s_name"/>
+            </basic>
+            <basic name="sHeadUrl">
+                <column name="s_head_url"/>
+            </basic>
+            <basic name="sSchool">
+                <column name="s_school"/>
+            </basic>
+            <basic name="sNo">
+                <column name="s_no"/>
+            </basic>
+            <basic name="sPassword">
+                <column name="s_password"/>
+            </basic>
+        </attributes>
+    </entity>
+</entity-mappings>

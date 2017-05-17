@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dao.IStudentInfo">
+
+    <!--private String sId;-->
+    <!--private String sName;-->
+    <!--private String sHeadUrl;-->
+    <!--private String sSchool;-->
+    <!--private String sNo;-->
+    <!--private String sPassword;-->
+
+    <resultMap id="studentInfoMapper" type="entity.StudentInfoEntity">
+
+        <id column="s_id" property="sId"/>
+        <result column="s_name" property="sName"/>
+        <result column="s_no" property="sNo"/>
+        <result column="s_password" property="sPassword"/>
+        <result column="s_head_url" property="sHeadUrl"/>
+        <result column="s_school" property="sSchool"/>
+
+    </resultMap>
+
+
+
+    <insert id="addStudent" parameterType="entity.StudentInfoEntity" keyProperty="id">
+        insert into student_info(s_id, s_name, s_head_url, s_school,s_no, s_password) values(#{sId},#{sName},#{sHeadUrl}, #{sSchool}, #{sNo}, #{sPassword})
+    </insert>
+
+
+    <select id="selectStudent" parameterType="String" resultMap="studentInfoMapper">
+
+        select * from student_info where s_name=#{sName}
+
+    </select>
+
+    <select id="selectStudentNameByStudentId" parameterType="String" resultType="String">
+
+        select s_name from PlanterDatabase.student_info where s_id=#{sId}
+
+    </select>
+
+    <select id="selectStudentByStudentId" resultMap="studentInfoMapper">
+
+        select * from PlanterDatabase.student_info where s_id=#{sId}
+
+    </select>
+
+    <select id="selectStudentByStudentName" parameterType="String" resultMap="studentInfoMapper">
+
+        SELECT * FROM PlanterDatabase.student_info WHERE s_name=#{sName}
+
+    </select>
+
+    <!--<update id=""></update>-->
+    <!--<select id="selectAttendanceCountById" parameterType=""></select>-->
+    <!--<delete id=""></delete>-->
+</mapper>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dao.IStudentSummaryOP">
+
+    <!--private String sId;-->
+    <!--private String summaryTime;-->
+    <!--private String summaryContent;-->
+    <!--private String summaryEvaluation;-->
+    <!--private String summaryBonus;-->
+    <!--private String cId;-->
+    <!--private Integer summaryStatus;-->
+
+    <resultMap id="StudentSummaryMapper" type="entity.StudentSummaryEntity">
+
+        <id column="student_summary_id" property="studentSummaryId"/>
+        <result column="summary_time" property="summaryTime"/>
+        <result column="summary_content" property="summaryContent"/>
+        <result column="summary_evaluation" property="summaryEvaluation"/>
+        <result column="summary_bonus" property="summaryBonus"/>
+        <result column="summary_status" property="summaryStatus"/>
+        <result column="s_id" property="sId"/>
+        <result column="open_class_id" property="openClassId"/>
+
+    </resultMap>
+
+
+    <insert id="insertStudentSummary" parameterType="entity.StudentSummaryEntity">
+        INSERT INTO PlanterDatabase.student_summary (s_id, summary_time, summary_content, summary_evaluation, summary_bonus, open_class_id, summary_status, student_summary_id) VALUES (#{sId}, #{summaryTime}, #{summaryContent}, #{summaryEvaluation}, #{summaryBonus}, #{openClassId}, #{summaryStatus}, #{studentSummaryId});
+    </insert>
+
+
+    <select id="getStudentSummaryListByOpenClassId" resultMap="StudentSummaryMapper">
+
+        SELECT * FROM PlanterDatabase.student_summary WHERE open_class_id=#{openClassId}
+
+    </select>
+
+    <!--<update id=""></update>-->
+    <!--<select id="selectAttendanceCountById" parameterType=""></select>-->
+    <!--<delete id=""></delete>-->
+</mapper>

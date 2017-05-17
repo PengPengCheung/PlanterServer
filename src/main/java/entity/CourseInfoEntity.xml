@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
+        version="2.0">
+
+    <entity class="entity.CourseInfoEntity">
+        <table name="course_info" schema="PlanterDatabase" catalog=""/>
+        <attributes>
+            <id name="cId">
+                <column name="c_id"/>
+            </id>
+            <basic name="courseTime">
+                <column name="course_time"/>
+            </basic>
+            <basic name="courseName">
+                <column name="course_name"/>
+            </basic>
+            <basic name="courseAddr">
+                <column name="course_addr"/>
+            </basic>
+            <basic name="courseDuration">
+                <column name="course_duration"/>
+            </basic>
+        </attributes>
+    </entity>
+</entity-mappings>
