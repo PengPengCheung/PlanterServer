@@ -126,7 +126,7 @@ public class LoginService {
 
             responseModel.setReason(Resource.LOGIN.LOGIN_FAIL);
 
-            DataResponse<LoginWebViewModel> response = new DataResponse<LoginWebViewModel>(Resource.LOGIN.STATUS_SUCCESS, Resource.LOGIN.LOGIN_FAIL);
+            DataResponse<LoginWebViewModel> response = new DataResponse<LoginWebViewModel>(Resource.LOGIN.STATUS_FAIL, Resource.LOGIN.LOGIN_FAIL);
 
             response.setData(responseModel);
 

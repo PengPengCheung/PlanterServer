@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dao.IResourceOP">
+
+
+    <!--private int treeStatus;-->
+    <!--private int treeSoil;-->
+    <!--private int treeWater;-->
+    <!--private int treeSun;-->
+
+    <resultMap id="ResourceInfoMapper" type="entity.ResourceInfoEntity">
+        <id column="resource_id" property="resourceId"/>
+        <result column="resource_upload_time" property="resourceUploadTime"/>
+        <result column="resource_url" property="resourceUrl"/>
+        <result column="resource_name" property="resourceName"/>
+        <result column="resource_download_count" property="resourceDownloadCount"/>
+        <result column="resource_like_count" property="resourceLikeCount"/>
+        <result column="resource_save_path" property="resourceSavePath"/>
+    </resultMap>
+
+    <resultMap id="TeacherResourceMapper" type="entity.TeacherCourseResourceTableEntity">
+
+        <id column="t_id" property="tId" />
+        <id column="c_id" property="cId"/>
+        <id column="resource_id" property="resourceId"/>
+
+    </resultMap>
+
+
+    <insert id="insertResourceInfoEntity" parameterType="entity.ResourceInfoEntity" >
+
+        INSERT INTO PlanterDatabase.resource_info (resource_id, resource_url, resource_name, resource_download_count, resource_like_count, resource_upload_time, resource_save_path)
+        VALUES (#{resourceId}, #{resourceUrl}, #{resourceName}, #{resourceDownloadCount}, #{resourceLikeCount}, #{resourceUploadTime}, #{resourceSavePath});
+
+
+    </insert>
+
+    <insert id="insertTeacherResourceConnection" parameterType="entity.TeacherCourseResourceTableEntity">
+
+        INSERT INTO PlanterDatabase.teacher_course_resource_table (t_id, c_id, resource_id)
+        VALUES (#{tId}, #{cId}, #{resourceId})
+
+    </insert>
+
+    <select id="selectResourceSavedPathByResourceId" parameterType="String" resultType="String">
+
+        SELECT resource_save_path FROM PlanterDatabase.resource_info WHERE resource_id=#{resourceId}
+
+    </select>
+
+    <select id="getTeacherResourceIdList" resultMap="TeacherResourceMapper">
+
+      SELECT * FROM PlanterDatabase.teacher_course_resource_table
+      WHERE t_id=#{tId} AND c_id=#{cId}
+
+    </select>
+
+    <select id="selectResourceInfoEntityByResourceId" resultMap="ResourceInfoMapper">
+
+        SELECT * FROM PlanterDatabase.resource_info WHERE resource_id=#{resourceId}
+
+    </select>
+
+    <select id="getResourceInfoIdListByCourseId" resultMap="TeacherResourceMapper">
+
+        SELECT * FROM PlanterDatabase.teacher_course_resource_table WHERE c_id=#{cId}
+
+    </select>
+
+    <update id="updateResourceInfoEntity" parameterType="entity.ResourceInfoEntity">
+
+        UPDATE PlanterDatabase.resource_info SET resource_download_count=#{resourceDownloadCount} WHERE resource_id=#{resourceId}
+
+    </update>
+
+    <delete id="deleteResourceByResourceId" parameterType="String">
+
+        DELETE FROM PlanterDatabase.resource_info WHERE resource_id=#{resourceId}
+
+    </delete>
+
+    <delete id="deleteTeacherResourceConnection" parameterType="String">
+
+        DELETE FROM PlanterDatabase.teacher_course_resource_table WHERE resource_id=#{resourceId}
+
+    </delete>
+
+
+
+    <!--<update id=""></update>-->
+    <!--<select id="selectAttendanceCountById" parameterType=""></select>-->
+    <!--<delete id=""></delete>-->
+</mapper>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dao.IStudentCourseTree">
+
+    <!--private String sId;-->
+    <!--private String cId;-->
+    <!--private String treeId;-->
+    <resultMap id="studentCourseTreeMapper" type="entity.StudentCourseTreeEntity">
+        <result column="s_id" property="sId"/>
+        <result column="c_id" property="cId"/>
+        <result column="tree_id" property="treeId"/>
+
+    </resultMap>
+
+    <update id="updateStudentTreeInfo" parameterType="entity.TreeInfoEntity">
+
+        UPDATE PlanterDatabase.tree_info SET tree_status=#{treeStatus}, tree_soil=#{treeSoil}, tree_sun=#{treeSun}, tree_water=#{treeWater}, tree_soil_used_num=#{treeSoilUsedNum}, tree_sun_used_num=#{treeSunUsedNum}, tree_water_used_num=#{treeWaterUsedNum}  WHERE tree_id=#{treeId}
+
+    </update>
+
+    <select id="selectStudentTreeById" resultMap="studentCourseTreeMapper">
+
+        select * from PlanterDatabase.student_course_tree where c_id=#{cId} and s_id=#{sId}
+
+    </select>
+
+    <insert id="insertStudentCourseTree" parameterType="entity.StudentCourseTreeEntity">
+
+        insert into PlanterDatabase.student_course_tree(s_id, c_id, tree_id) values(#{sId},#{cId},#{treeId})
+
+    </insert>
+</mapper>

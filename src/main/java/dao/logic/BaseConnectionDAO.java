@@ -70,27 +70,20 @@ public class BaseConnectionDAO extends BaseDAO {
             String courseId = baseConnectionEntity.getcId();
             String teacherId = baseConnectionEntity.gettId();
             String studentId = baseConnectionEntity.getsId();
-            if(courseId != null && courseId.equals(entity.getcId())){
+            System.out.println("courseId: " + courseId + ", teacherId: " + teacherId + ", studentId: " + studentId);
+            if(courseId != null && courseId.equals(entity.getcId())){ // 已创建的课程才添加，不添加未创建的课程
 
                 if(teacherId == null){
+                    isSuccess = false;
                     return isSuccess;
                 }
 
                 if(teacherId.equals(entity.gettId())){
-                    if(studentId != null && studentId.equals(entity.getsId())){
+                    if(studentId != null && studentId.equals(entity.getsId())){ // 如果存在该学生id，则说明此联系已经建立
                         return isSuccess;
                     }
                 }
-
-//
-//
-//                if(studentId == null){
-//
-//                }
             }
-//            if(courseId != null && courseId.equals(entity.getcId()) && teacherId != null && teacherId.equals(entity.gettId()) && studentId != null && studentId.equals(entity.getsId())){
-//                return;
-//            }
         }
         connection.insertBaseConnectionEntity(entity);
         session.commit();

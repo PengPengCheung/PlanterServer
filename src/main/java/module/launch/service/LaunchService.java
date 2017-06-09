@@ -25,26 +25,29 @@ public class LaunchService {
     }
 
 
-//    public DataResponse<PlanterViewModel> signUp(Map<String, String> params){
-//        SignUpMobViewModel viewModel = constructViewModel(params);
-//        StudentInfoEntity studentInfoEntity = mSignUpDAO.insertStudentInfo(viewModel);
-//        PlanterViewModel planterViewModel = constructResponseModel(studentInfoEntity);
-//
-//        DataResponse<PlanterViewModel> response = new DataResponse<PlanterViewModel>(200,"success");
-//        response.setData();
-//        return response;
-//    }
-//
-//    private PlanterViewModel constructResponseModel(StudentInfoEntity studentInfoEntity) {
-//        PlanterViewModel model = new PlanterViewModel();
-//        model.setmPlanterStatus();
-//        model.setmPlanterWater(tree.getTreeWater());
-//        model.setmPlanterSunshine(tree.getTreeSun());
-//        model.setmPlanterSoil(tree.getTreeSoil());
-//        model.setmPlanterPercent(0);
-//
-//        return model;
-//    }
+    public DataResponse<PlanterViewModel> signUp(Map<String, String> params){
+        SignUpMobViewModel viewModel = constructViewModel(params);
+        StudentInfoEntity studentInfoEntity = mSignUpDAO.insertStudentInfo(viewModel);
+        PlanterViewModel planterViewModel = constructResponseModel(studentInfoEntity);
+
+        DataResponse<PlanterViewModel> response = new DataResponse<PlanterViewModel>(200,"success");
+        response.setData(planterViewModel);
+        return response;
+    }
+
+    private PlanterViewModel constructResponseModel(StudentInfoEntity studentInfoEntity) {
+        PlanterViewModel model = new PlanterViewModel();
+
+        model.setmStudentId(studentInfoEntity.getsId());
+
+        model.setmPlanterStatus(Resource.TREE_STATUS.TREE_SEED);
+        model.setmPlanterWater(0);
+        model.setmPlanterSunshine(0);
+        model.setmPlanterSoil(0);
+        model.setmPlanterPercent(0);
+
+        return model;
+    }
 
     public DataResponse<PlanterViewModel> getResultOfSignUp(Map<String, String> params){
 

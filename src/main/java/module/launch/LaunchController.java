@@ -32,13 +32,13 @@ public class LaunchController {
         return responseStr;
     }
 
-//    @RequestMapping(value = "/mob/signup", method = RequestMethod.POST)
-//    @ResponseBody
-//    public DataResponse<PlanterViewModel> SignUpForStudent(@RequestBody Map<String, String> params){
-//        CommonUtil.printLog("SignUpForStudent");
-//        LaunchService service = new LaunchService();
-//        return service.signUp(params);
-//    }
+    @RequestMapping(value = "/mob/signupWhenLaunch", method = RequestMethod.POST)
+    @ResponseBody
+    public DataResponse<PlanterViewModel> SignUpForStudent(@RequestBody Map<String, String> params){
+        CommonUtil.printLog("SignUpForStudent");
+        LaunchService service = new LaunchService();
+        return service.signUp(params);
+    }
 
 
 

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dao.IHomeworkOP">
+
+    <resultMap id="HomeworkMapper" type="entity.HomeworkInfoEntity">
+
+        <id column="homework_id" property="homeworkId"/>
+        <result column="homework_title" property="homeworkTitle"/>
+        <result column="homework_content" property="homeworkContent"/>
+        <result column="homework_status" property="homeworkStatus"/>
+        <result column="homework_commit_ddl" property="homeworkCommitDdl"/>
+
+    </resultMap>
+
+    <resultMap id="TeacherHomeworkMapper" type="entity.TeacherCourseHomeworkTableEntity">
+
+        <id column="t_id" property="tId"/>
+        <id column="c_id" property="cId"/>
+        <id column="homework_id" property="homeworkId"/>
+        <result column="homework_publish_status" property="homeworkPublishStatus"/>
+
+    </resultMap>
+
+    <resultMap id="StudentHomeworkMapper" type="entity.StudentCourseHomeworkTableEntity">
+        <id column="student_submit_homework_id" property="studentSubmitHomeworkId"/>
+        <result column="homework_id" property="homeworkId"/>
+        <result column="s_id" property="sId"/>
+        <result column="c_id" property="cId"/>
+        <result column="homework_submit_date" property="homeworkSubmitDate"/>
+        <result column="homework_score_status" property="homeworkScoreStatus"/>
+        <result column="homework_score" property="homeworkScore"/>
+        <result column="homework_submit_name" property="homeworkSubmitName"/>
+        <result column="homework_download_url" property="homeworkDownloadUrl"/>
+
+
+    </resultMap>
+
+    <insert id="insertHomeworkInfoEntity" parameterType="entity.HomeworkInfoEntity">
+
+        INSERT INTO PlanterDatabase.homework_info (homework_id, homework_title, homework_content, homework_status, homework_commit_ddl) VALUES (#{homeworkId}, #{homeworkTitle}, #{homeworkContent}, #{homeworkStatus}, #{homeworkCommitDdl})
+
+    </insert>
+
+    <insert id="insertTeacherHomeworkRecord" parameterType="entity.TeacherCourseHomeworkTableEntity">
+
+        INSERT INTO PlanterDatabase.teacher_course_homework_table (t_id, c_id, homework_id, homework_publish_status) VALUES (#{tId}, #{cId}, #{homeworkId}, #{homeworkPublishStatus})
+
+    </insert>
+
+    <insert id="insertStudentHomeworkRecord" parameterType="entity.StudentCourseHomeworkTableEntity">
+
+        INSERT INTO PlanterDatabase.student_course_homework_table (s_id, c_id, homework_id, homework_submit_date, homework_score_status, homework_score, student_submit_homework_id, homework_download_url, homework_submit_name, homework_save_path)
+        VALUES (#{sId}, #{cId}, #{homeworkId}, #{homeworkSubmitDate}, #{homeworkScoreStatus}, #{homeworkScore}, #{studentSubmitHomeworkId}, #{homeworkDownloadUrl}, #{homeworkSubmitName}, #{homeworkSavePath})
+
+    </insert>
+
+    <select id="selectHomeworkSavePathByHomeworkSubmitId" parameterType="String" resultType="String">
+
+        SELECT homework_save_path FROM PlanterDatabase.student_course_homework_table WHERE student_submit_homework_id=#{studentSubmitHomeworkId}
+
+    </select>
+
+
+    <select id="selectHomeworkIdListByTeacherIdAndCourseId" resultType="String">
+
+        SELECT homework_id FROM PlanterDatabase.teacher_course_homework_table WHERE t_id=#{tId} AND c_id=#{cId}
+
+    </select>
+
+    <select id="selectStudentCourseHomeworkInfoByHomeworkIdAndCourseId" resultMap="StudentHomeworkMapper">
+
+        SELECT * FROM PlanterDatabase.student_course_homework_table WHERE homework_id=#{homeworkId} AND c_id=#{cId}
+
+    </select>
+
+    <select id="selectHomeworkInfoEntityByHomeworkId" resultMap="HomeworkMapper">
+
+        SELECT * FROM PlanterDatabase.homework_info WHERE homework_id=#{homeworkId}
+
+    </select>
+
+    <select id="selectStudentSubmitHomeworkInfoList" resultMap="StudentHomeworkMapper" >
+
+        SELECT * FROM PlanterDatabase.student_course_homework_table WHERE homework_id=#{homeworkId}
+
+    </select>
+
+    <select id="selectTeacherCourseHomeworkInfoListByCourseId" resultMap="TeacherHomeworkMapper">
+
+        SELECT * FROM PlanterDatabase.teacher_course_homework_table WHERE c_id=#{cId}
+
+    </select>
+
+    <select id="selectStudentHomeworkInfoEntityBySubmitId"  resultType="entity.StudentCourseHomeworkTableEntity">
+
+        SELECT * FROM PlanterDatabase.student_course_homework_table WHERE student_submit_homework_id=#{studentSubmitHomeworkId}
+
+    </select>
+
+
+    <!--private String s_id;-->
+    <!--private String cId;-->
+    <!--private String homeworkId;-->
+    <!--private String homeworkSubmitDate;-->
+    <!--private Integer homeworkScoreStatus;-->
+    <!--private Integer homeworkScore;-->
+    <!--private String studentSubmitHomeworkId;-->
+    <!--private String homeworkDownloadUrl;-->
+    <!--private String homeworkSubmitName;-->
+    <!--private String homeworkSavePath;-->
+    <update id="updateStudentCourseHomeworkInfoEntity" parameterType="entity.StudentCourseHomeworkTableEntity">
+
+        UPDATE PlanterDatabase.student_course_homework_table SET homework_score=#{homeworkScore}, homework_score_status=#{homeworkScoreStatus} WHERE student_submit_homework_id=#{studentSubmitHomeworkId}
+
+    </update>
+
+
+    <update id="updateHomeworkStatus" parameterType="entity.HomeworkInfoEntity">
+
+        UPDATE PlanterDatabase.homework_info SET homework_status=#{homeworkStatus} WHERE homework_id=#{homeworkId}
+
+    </update>
+
+
+    <!--<update id=""></update>-->
+    <!--<select id="selectAttendanceCountById" parameterType=""></select>-->
+    <!--<delete id=""></delete>-->
+</mapper>

@@ -12,13 +12,13 @@ public class Resource {
 
     public static final String GOEASY_CHANNEL = "Planter";
     // GoEasy
-    public static final String GOEASY_APP_KEY = "a3046b42-bae4-4785-bdac-26da75afe10b";
+    public static final String GOEASY_APP_KEY = "BC-be5f25350dac454d943677328902cccc";//"a3046b42-bae4-4785-bdac-26da75afe10b";
 
 
-    private static final String HOST_URL = "http://10.173.8.165:8080"; // http://10.173.40.45:8080
-//    private static final String HOST_URL = "http://118.89.48.183:8080/Planter";
-    public static final String RESOURCE_SAVE_ABSOLUTE_PATH = "/file/Upload";
-    public static final String RESOURCE_DOWNLOAD_URL = HOST_URL + "/FileUpload/fileDownload_servlet";
+//    private static final String HOST_URL = "http://10.173.8.165:8080"; // http://10.173.40.45:8080
+    private static final String HOST_URL = "http://118.89.48.183:8080";
+    public static final String RESOURCE_SAVE_ABSOLUTE_PATH = "/files/Upload";
+    public static final String RESOURCE_DOWNLOAD_URL = HOST_URL + "/Planter/FileUpload/fileDownload_servlet";
     public static final String STUDENT_HOMEWORK_DOWNLOAD_URL = HOST_URL + "/FileDownload/StudentHomeworkDownload";
 
 
@@ -269,6 +269,7 @@ public class Resource {
 
     public static class LOGIN{
         public static final int STATUS_SUCCESS = 200;
+        public static final int STATUS_FAIL = -1;
 
         public static final String LOGIN_SUCCESS = "登录成功";
         public static final String LOGIN_FAIL = "用户名或密码不正确";

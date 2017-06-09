@@ -46,7 +46,10 @@ public class CourseService {
 
         CourseInfoEntity entity = getCourseInfoByCourseCode(stuCourseCode);
         if(entity != null){ // 表示学生输入的courseCode有匹配的课程
+            System.out.println("entity not null ");
             boolean isSuccess = updateBaseConnection(studentId, entity.getcId());
+
+            System.out.println("isSuccess? " + isSuccess);
 
             if(isSuccess){
                 PlanterViewModel planterViewModel = constructPlanterViewModelWhenSuccess(entity);
@@ -62,6 +65,7 @@ public class CourseService {
 
 
         } else {
+            System.out.println("entity is null ");
             PlanterViewModel planterViewModel = constructPlanterViewModelWhenFail();
             DataResponse<PlanterViewModel> response = new DataResponse<PlanterViewModel>(200, "fail");
             response.setData(planterViewModel);
@@ -79,6 +83,7 @@ public class CourseService {
             String teacherId = entityList.get(0).gettId();
             BaseConnectionEntity entity = constructBaseConnectionEntity(teacherId, courseId, studentId);
             boolean success = dao.insertBaseConnection(entity);
+            System.out.println("CourseService updateBaseConnection: " + success);
             return success;
         } else {
             return false;

@@ -177,8 +177,8 @@ public final class Files_Utils_DG {
      //-------------------------------------------------------------------------------
      //return server absolute path（real path）
      public static String getServerPath(HttpServletRequest request, String filePath) {
-//         return request.getSession().getServletContext().getRealPath(filePath);
-         return "/Users/peng/Software/Tomcat/apache-tomcat-7.0.75/webapps" + filePath;
+         return request.getSession().getServletContext().getRealPath(filePath);
+//         return "/Users/peng/Software/Tomcat/apache-tomcat-7.0.75/webapps" + filePath;
      }
 
      //return a dir that named date of today ; example:20160912

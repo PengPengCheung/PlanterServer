@@ -52,14 +52,14 @@ public class PushTest {
 //    static String APP_KEY = "82815b3656aaca29b5b32f17";
 
     // GoEasy
-    static String appKey = "a3046b42-bae4-4785-bdac-26da75afe10b";
+    static String appKey = "BC-be5f25350dac454d943677328902cccc";//"a3046b42-bae4-4785-bdac-26da75afe10b";
 
     public static void main(String[] args) throws PushClientException,PushServerException{
 //        pushToSingleDevice();
 //            JPushTest();
-//        goEasyPushTest();
+        goEasyPushTest();
 //        pushToWebDemo();
-        interactionPushTest();
+//        interactionPushTest();
 //        pushToWebAttentionDemo();
 //        pushToWebGroupAttentionDemo();
     }
